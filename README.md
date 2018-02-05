@@ -1,4 +1,4 @@
-# Patch for BLS (SDK) Stack 
+# Patch for BLE SDK Tools
 Enable run TI BLE SDK on linux without modifying Code Composer Studio projects.
 
 # To run
