@@ -1,0 +1,27 @@
+#!/bin/sh
+
+# Workaround for running Code Composer Studio projects transparently on linux
+# Wrapper for run python script instead of .exe with wine
+# Leandro Heck (2018)
+
+script_path=$(dirname $0)
+script_name=$(basename $0)
+script_name="${script_name%.*}"
+
+project_path=$(dirname $(pwd))
+project=$(basename $project_path)
+
+# Remove old stuff
+rm -rf /tmp/${script_name}.cmd
+rm -rf /tmp/${script_name}.log
+
+touch /tmp/${script_name}.cmd
+echo "Executed on $(date)" >> /tmp/${script_name}.cmd
+echo "Project: ${project} " >> /tmp/${script_name}.cmd
+echo "Path: ${project_path} " >> /tmp/${script_name}.cmd
+echo "" >> /tmp/${script_name}.cmd
+echo "python $script_path/${script_name}.py $*" | sed "s/[ ]\+/ \\\ \n/g" >> /tmp/${script_name}.cmd
+
+python $script_path/${script_name}.py $* | tee /tmp/${script_name}.log
+
+echo ">> Execution logs on" /tmp/${script_name}.cmd /tmp/${script_name}.log
