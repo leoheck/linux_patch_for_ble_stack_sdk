@@ -1,10 +1,10 @@
 # Patch for BLE SDK Tools
 Enable run TI BLE SDK on linux without modifying Code Composer Studio projects.
 
-# To run
+# Apply patch
     ./fix.sh
 
-# To revert changes
+# Revert changes
     ./fix.sh -r
 
 # Outputs
